@@ -145,7 +145,7 @@ export const ModularApp = () => {
           />
           
           <PerformanceMonitor 
-            performance={performance}
+            performance={performanceMetrics}
             isInitialized={isInitialized}
           />
         </div>
