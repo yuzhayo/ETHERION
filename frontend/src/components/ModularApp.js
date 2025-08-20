@@ -32,12 +32,6 @@ export const ModularApp = () => {
           orchestratorRef.current = new CoreOrchestrator();
           await orchestratorRef.current.initialize(spriteEngineRef.current);
           
-          // Set up performance monitoring
-          const performanceMonitor = new PerformanceMonitor();
-          performanceMonitor.onUpdate = (metrics) => {
-            setPerformanceMetrics(metrics);
-          };
-          
           // Load initial modules
           await loadInitialModules();
           
