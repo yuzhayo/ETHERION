@@ -67,15 +67,35 @@ export class SpriteEngine {
   }
 
   setupResizeHandler() {
-    const resizeObserver = new ResizeObserver(() => {
-      this.resizeCanvas();
-    });
-    
-    if (this.app.canvas && this.app.canvas.parentElement) {
-      resizeObserver.observe(this.app.canvas.parentElement);
+    // Use a more robust resize handling approach
+    const handleResize = () => {
+      requestAnimationFrame(() => {
+        this.resizeCanvas();
+      });
+    };
+
+    // Use both ResizeObserver and window resize as fallback
+    if (window.ResizeObserver) {
+      try {
+        this.resizeObserver = new ResizeObserver((entries) => {
+          // Debounce resize calls
+          if (this.resizeTimeout) {
+            clearTimeout(this.resizeTimeout);
+          }
+          this.resizeTimeout = setTimeout(handleResize, 16); // ~60fps
+        });
+        
+        if (this.app.canvas && this.app.canvas.parentElement) {
+          this.resizeObserver.observe(this.app.canvas.parentElement);
+        }
+      } catch (error) {
+        console.warn('ResizeObserver failed, falling back to window resize:', error);
+        window.addEventListener('resize', handleResize);
+      }
+    } else {
+      // Fallback for older browsers
+      window.addEventListener('resize', handleResize);
     }
-    
-    this.resizeObserver = resizeObserver;
   }
 
   resizeCanvas() {
