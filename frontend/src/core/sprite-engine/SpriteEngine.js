@@ -20,9 +20,10 @@ export class SpriteEngine {
     try {
       console.log('Initializing Sprite Engine...');
       
-      // Create PIXI Application
-      this.app = new PIXI.Application({
-        view: canvas,
+      // Create PIXI Application using modern API
+      this.app = new PIXI.Application();
+      await this.app.init({
+        canvas: canvas,
         width: canvas.clientWidth || 800,
         height: canvas.clientHeight || 600,
         backgroundColor: 0x1a1a2e,
@@ -48,9 +49,6 @@ export class SpriteEngine {
       
       this.isInitialized = true;
       console.log('Sprite Engine initialized successfully');
-      
-      // Start the application
-      this.app.start();
       
     } catch (error) {
       console.error('Failed to initialize Sprite Engine:', error);
