@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { EventEmitter } from 'events';
+import * as PIXI from 'pixi.js';
 
 export class CoreOrchestrator extends EventEmitter {
   constructor() {
