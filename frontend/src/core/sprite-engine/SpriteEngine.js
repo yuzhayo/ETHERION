@@ -71,17 +71,17 @@ export class SpriteEngine {
       this.resizeCanvas();
     });
     
-    if (this.app.view.parentElement) {
-      resizeObserver.observe(this.app.view.parentElement);
+    if (this.app.canvas && this.app.canvas.parentElement) {
+      resizeObserver.observe(this.app.canvas.parentElement);
     }
     
     this.resizeObserver = resizeObserver;
   }
 
   resizeCanvas() {
-    if (!this.app || !this.app.view.parentElement) return;
+    if (!this.app || !this.app.canvas || !this.app.canvas.parentElement) return;
     
-    const parent = this.app.view.parentElement;
+    const parent = this.app.canvas.parentElement;
     const rect = parent.getBoundingClientRect();
     
     // Update canvas size
