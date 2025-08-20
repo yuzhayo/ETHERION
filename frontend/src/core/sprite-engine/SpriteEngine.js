@@ -99,17 +99,28 @@ export class SpriteEngine {
   }
 
   resizeCanvas() {
-    if (!this.app || !this.app.canvas || !this.app.canvas.parentElement) return;
-    
-    const parent = this.app.canvas.parentElement;
-    const rect = parent.getBoundingClientRect();
-    
-    // Update canvas size
-    this.app.renderer.resize(rect.width, rect.height);
-    
-    // Update any background elements
-    if (this.backgroundGraphics) {
-      this.updateBackground();
+    try {
+      if (!this.app || !this.app.canvas || !this.app.canvas.parentElement) return;
+      
+      const parent = this.app.canvas.parentElement;
+      const rect = parent.getBoundingClientRect();
+      
+      // Only resize if dimensions have actually changed
+      if (rect.width > 0 && rect.height > 0) {
+        const currentWidth = this.app.screen.width;
+        const currentHeight = this.app.screen.height;
+        
+        if (Math.abs(currentWidth - rect.width) > 1 || Math.abs(currentHeight - rect.height) > 1) {
+          this.app.renderer.resize(rect.width, rect.height);
+          
+          // Update any background elements
+          if (this.backgroundGraphics) {
+            this.updateBackground();
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('Resize canvas error:', error);
     }
   }
 
