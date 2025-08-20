@@ -35,14 +35,14 @@ export const ModularApp = () => {
           // Set up performance monitoring
           const performanceMonitor = new PerformanceMonitor();
           performanceMonitor.onUpdate = (metrics) => {
-            setPerformance(metrics);
+            setPerformanceMetrics(metrics);
           };
           
           // Load initial modules
           await loadInitialModules();
           
           const endTime = performance.now();
-          setPerformance(prev => ({
+          setPerformanceMetrics(prev => ({
             ...prev,
             loadTime: endTime - startTime
           }));
