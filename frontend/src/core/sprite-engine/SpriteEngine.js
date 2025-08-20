@@ -314,6 +314,10 @@ export class SpriteEngine {
       this.resizeObserver.disconnect();
     }
     
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    
     if (this.backgroundTicker) {
       this.app.ticker.remove(this.backgroundTicker);
     }
