@@ -131,7 +131,7 @@ export const ModularApp = () => {
             <div className="canvas-overlay">
               <div>Sprite Engine Active</div>
               <div style={{ fontSize: '0.8rem', opacity: 0.8, marginTop: '4px' }}>
-                {performance.sprites} sprites • {Math.round(performance.fps)} FPS
+                {performanceMetrics.sprites} sprites • {Math.round(performanceMetrics.fps)} FPS
               </div>
             </div>
           )}
