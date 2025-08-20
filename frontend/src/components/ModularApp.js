@@ -11,7 +11,7 @@ export const ModularApp = () => {
   const spriteEngineRef = useRef(null);
   const [isInitialized, setIsInitialized] = useState(false);
   const [modules, setModules] = useState([]);
-  const [performance, setPerformance] = useState({
+  const [performanceMetrics, setPerformanceMetrics] = useState({
     fps: 0,
     sprites: 0,
     memory: 0,
